@@ -1,3 +1,8 @@
+# Repreducible Research with R Markdown
+This repository contains te results for the first assessment for the [Reproducible Research course](https://class.coursera.org/repdata-031) on [Coursera](https://www.coursera.org/)
+
+The [submission page](https://class.coursera.org/repdata-031/human_grading/view/courses/975144/assessments/3/submissions).
+
 ## Introduction
 
 It is now possible to collect a large amount of data about personal
