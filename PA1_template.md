@@ -1,14 +1,10 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 
 ## Loading and preprocessing the data
 
-```{r echo=TRUE}
+
+```r
 #Download and unzip the data file
 address <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
 address <- sub("^https", "http", address) #https does not work
@@ -20,6 +16,13 @@ activity <- read.csv(csvname)
 
 #housekeeping - remove the zip as it is no longer needed
 file.remove(zipname, csvname)
+```
+
+```
+## [1] TRUE TRUE
+```
+
+```r
 #housekeeping
 rm(address, zipname, csvname)
 ```
