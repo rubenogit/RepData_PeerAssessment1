@@ -50,7 +50,8 @@ hist(stepsperdate$steps, breaks=10)
 ![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
 
 ```r
-mean(stepsperdate$steps)
+meanstepsperdate <- mean(stepsperdate$steps)
+meanstepsperdate
 ```
 
 ```
@@ -58,13 +59,16 @@ mean(stepsperdate$steps)
 ```
 
 ```r
-median(stepsperdate$steps)
+medianstepsperdate <- median(stepsperdate$steps)
+medianstepsperdate
 ```
 
 ```
 ## [1] 10765
 ```
 
+The mean total numbers of steps taken per day is `print meanstepstakenperday`.
+The median total numbers of steps taken per day is `medianstepstakenperday`.
 
 
 ## What is the average daily activity pattern?

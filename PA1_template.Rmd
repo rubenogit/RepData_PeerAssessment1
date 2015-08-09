@@ -40,10 +40,15 @@ rm(address, zipname, csvname)
 ```{r}
 stepsperdate <- (aggregate(steps ~ date, data=activity, sum))
 hist(stepsperdate$steps, breaks=10)
-mean(stepsperdate$steps)
-median(stepsperdate$steps)
+meanstepsperdate <- mean(stepsperdate$steps)
+meanstepsperdate
+
+medianstepsperdate <- median(stepsperdate$steps)
+medianstepsperdate
 ```
 
+The mean total numbers of steps taken per day is `print meanstepstakenperday`.
+The median total numbers of steps taken per day is `medianstepstakenperday`.
 
 
 ## What is the average daily activity pattern?
