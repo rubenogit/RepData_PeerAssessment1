@@ -27,18 +27,6 @@ file.remove(zipname, csvname)
 rm(address, zipname, csvname)
 ```
 
-
-```r
-#Convert string to hours and minutes
-#library(lubridate)
-#activity$time <- hm(paste(
-#    substr(activity$interval+10000,2,3),
-#    substr(activity$interval+10000,4,5)
-#    )
-#  )
-```
-
-
 ## What is mean total number of steps taken per day?
 
 
@@ -47,7 +35,7 @@ stepsperdate <- (aggregate(steps ~ date, data=activity, sum))
 hist(stepsperdate$steps, breaks=10)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
 
 ```r
 meanstepsperdate <- mean(stepsperdate$steps)
@@ -67,8 +55,8 @@ medianstepsperdate
 ## [1] 10765
 ```
 
-The mean total numbers of steps taken per day is `print meanstepstakenperday`.
-The median total numbers of steps taken per day is `medianstepstakenperday`.
+The mean total numbers of steps taken per day is 10766.19.
+The median total numbers of steps taken per day is 10765.
 
 
 ## What is the average daily activity pattern?
@@ -79,8 +67,18 @@ meanstepsperinterval <- (aggregate(steps ~ interval, data=activity, mean))
 plot(meanstepsperinterval, type="l")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
 
+```r
+interval_with_max_steps <- meanstepsperinterval$interval[which(meanstepsperinterval$steps == max(meanstepsperinterval$steps))]
+interval_with_max_steps 
+```
+
+```
+## [1] 835
+```
+
+The interval with the most steps is 835.
 
 ## Imputing missing values
 
@@ -138,7 +136,7 @@ new_stepsperdate <- (aggregate(steps ~ date, data=new_activity, sum))
 hist(new_stepsperdate$steps, breaks=10)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
 
 ```r
 mean(new_stepsperdate$steps)
@@ -179,7 +177,7 @@ xyplot(steps ~ interval | weekend,
        panel=panel.lines)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-7-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
 
 
 

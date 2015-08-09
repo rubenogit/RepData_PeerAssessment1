@@ -24,17 +24,6 @@ file.remove(zipname, csvname)
 rm(address, zipname, csvname)
 ```
 
-```{r}
-#Convert string to hours and minutes
-#library(lubridate)
-#activity$time <- hm(paste(
-#    substr(activity$interval+10000,2,3),
-#    substr(activity$interval+10000,4,5)
-#    )
-#  )
-```
-
-
 ## What is mean total number of steps taken per day?
 
 ```{r}
@@ -47,8 +36,8 @@ medianstepsperdate <- median(stepsperdate$steps)
 medianstepsperdate
 ```
 
-The mean total numbers of steps taken per day is `print meanstepstakenperday`.
-The median total numbers of steps taken per day is `medianstepstakenperday`.
+The mean total numbers of steps taken per day is `r sprintf("%.2f", meanstepsperdate)`.
+The median total numbers of steps taken per day is `r medianstepsperdate`.
 
 
 ## What is the average daily activity pattern?
@@ -56,8 +45,12 @@ The median total numbers of steps taken per day is `medianstepstakenperday`.
 ```{r}
 meanstepsperinterval <- (aggregate(steps ~ interval, data=activity, mean))
 plot(meanstepsperinterval, type="l")
+
+interval_with_max_steps <- meanstepsperinterval$interval[which(meanstepsperinterval$steps == max(meanstepsperinterval$steps))]
+interval_with_max_steps 
 ```
 
+The interval with the most steps is `r interval_with_max_steps`.
 
 ## Imputing missing values
 ```{r}
