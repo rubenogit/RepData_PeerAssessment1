@@ -24,17 +24,90 @@ file.remove(zipname, csvname)
 rm(address, zipname, csvname)
 ```
 
+```{r}
+#Convert string to hours and minutes
+#library(lubridate)
+#activity$time <- hm(paste(
+#    substr(activity$interval+10000,2,3),
+#    substr(activity$interval+10000,4,5)
+#    )
+#  )
+```
+
 
 ## What is mean total number of steps taken per day?
+
+```{r}
+stepsperdate <- (aggregate(steps ~ date, data=activity, sum))
+hist(stepsperdate$steps, breaks=10)
+mean(stepsperdate$steps)
+median(stepsperdate$steps)
+```
 
 
 
 ## What is the average daily activity pattern?
 
+```{r}
+meanstepsperinterval <- (aggregate(steps ~ interval, data=activity, mean))
+plot(meanstepsperinterval, type="l")
+```
 
 
 ## Imputing missing values
+```{r}
+sum(is.na(activity$steps))
+
+intervals_missing_steps <- activity$interval[is.na(activity$steps)]
+means_for_missing_steps <-
+sapply(intervals_missing_steps,
+       function(x) meanstepsperinterval$steps[
+         meanstepsperinterval$interval==x
+       ]
+       )
+
+new_activity <- activity
+new_activity$steps[is.na(new_activity$steps)] <- means_for_missing_steps
+
+head(activity)
+head(new_activity)
+```
+
+
+```{r}
+
+new_stepsperdate <- (aggregate(steps ~ date, data=new_activity, sum))
+hist(new_stepsperdate$steps, breaks=10)
+mean(new_stepsperdate$steps)
+median(new_stepsperdate$steps)
+
+```
 
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+```{r}
+library(lubridate)
+
+activity$weekdays <- weekdays(ymd(activity$date))
+
+activity$weekend <- "weekday"
+activity$weekend[activity$weekdays %in%
+                 c("Saturday","Sunday") ] <- "weekend"
+
+meanstepsweekend <- (aggregate(steps ~ interval + weekend,
+                               data=activity, mean))
+
+library(lattice)
+xyplot(steps ~ interval | weekend,
+       data=meanstepsweekend,
+       layout=c(1,2,1),
+       panel=panel.lines)
+```
+
+
+```{r}
+
+```
+
+
