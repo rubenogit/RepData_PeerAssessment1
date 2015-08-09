@@ -82,8 +82,12 @@ The interval with the most steps is 835.
 
 ## Imputing missing values
 
+I replace the missing values with the mean for that period.
+
+
 ```r
-sum(is.na(activity$steps))
+number_of_missing_values <- sum(is.na(activity$steps))
+number_of_missing_values
 ```
 
 ```
@@ -129,6 +133,7 @@ head(new_activity)
 ## 6 2.0943396 2012-10-01       25
 ```
 
+The number of missing values is 2304.
 
 
 ```r
@@ -139,7 +144,8 @@ hist(new_stepsperdate$steps, breaks=10)
 ![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
 
 ```r
-mean(new_stepsperdate$steps)
+newmean_stepsperdate <- mean(new_stepsperdate$steps)
+newmean_stepsperdate
 ```
 
 ```
@@ -147,12 +153,19 @@ mean(new_stepsperdate$steps)
 ```
 
 ```r
-median(new_stepsperdate$steps)
+newmedian_stepsperdate <- median(new_stepsperdate$steps)
+newmedian_stepsperdate
 ```
 
 ```
 ## [1] 10766.19
 ```
+The mean total numbers of steps taken per day for the data set with imputed missing values
+is 10766.19
+versus 10766.19 in the data set with missing values.
+The median total numbers of steps taken per day for the data set with imputed missing values
+is 10766.19
+versus 10765 in the data set with missing values.
 
 
 
@@ -179,7 +192,4 @@ xyplot(steps ~ interval | weekend,
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
 
-
-
-
-
+The activity pattern during weekdays shows a clear spike in the morning. The activity pattern during the weekend is more evenly distributed.

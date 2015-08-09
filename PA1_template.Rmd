@@ -53,8 +53,12 @@ interval_with_max_steps
 The interval with the most steps is `r interval_with_max_steps`.
 
 ## Imputing missing values
+
+I replace the missing values with the mean for that period.
+
 ```{r}
-sum(is.na(activity$steps))
+number_of_missing_values <- sum(is.na(activity$steps))
+number_of_missing_values
 
 intervals_missing_steps <- activity$interval[is.na(activity$steps)]
 means_for_missing_steps <-
@@ -71,15 +75,24 @@ head(activity)
 head(new_activity)
 ```
 
+The number of missing values is `r number_of_missing_values`.
 
 ```{r}
 
 new_stepsperdate <- (aggregate(steps ~ date, data=new_activity, sum))
 hist(new_stepsperdate$steps, breaks=10)
-mean(new_stepsperdate$steps)
-median(new_stepsperdate$steps)
+newmean_stepsperdate <- mean(new_stepsperdate$steps)
+newmean_stepsperdate
 
+newmedian_stepsperdate <- median(new_stepsperdate$steps)
+newmedian_stepsperdate
 ```
+The mean total numbers of steps taken per day for the data set with imputed missing values
+is `r sprintf("%.2f", newmean_stepsperdate)`
+versus `r sprintf("%.2f", meanstepsperdate)` in the data set with missing values.
+The median total numbers of steps taken per day for the data set with imputed missing values
+is `r sprintf("%.2f", newmedian_stepsperdate)`
+versus `r medianstepsperdate` in the data set with missing values.
 
 
 
@@ -103,9 +116,4 @@ xyplot(steps ~ interval | weekend,
        panel=panel.lines)
 ```
 
-
-```{r}
-
-```
-
-
+The activity pattern during weekdays shows a clear spike in the morning. The activity pattern during the weekend is more evenly distributed.
